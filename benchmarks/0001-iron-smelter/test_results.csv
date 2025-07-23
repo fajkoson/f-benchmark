@@ -1,0 +1,9 @@
+map_name,run_index,startup_time,end_time,avg_ms,min_ms,max_ms,ticks,actual_ticks,execution_time,effective_ups,factorio_version,platform
+iron_smelter_enable_clocked.zip,1,5.671,13.248,1.071,0.663,3.074,5000,5000,5353.344,934.0,2.0.60,x64
+iron_smelter_lead_follower.zip,1,5.750,13.150,1.020,0.738,3.372,5000,5000,5098.373,980.71,2.0.60,x64
+iron_smelter_lead_follower_mini.zip,1,5.714,12.878,0.975,0.614,3.475,5000,5000,4874.829,1025.68,2.0.60,x64
+iron_smelter_threshold.zip,1,5.742,13.219,1.023,0.635,3.640,5000,5000,5113.464,977.81,2.0.60,x64
+iron_smelter_enable_clocked.zip,2,5.867,13.958,1.180,0.698,4.944,5000,5000,5899.342,847.55,2.0.60,x64
+iron_smelter_lead_follower.zip,2,5.756,13.834,1.136,0.775,6.000,5000,5000,5680.055,880.27,2.0.60,x64
+iron_smelter_lead_follower_mini.zip,2,5.980,13.854,1.116,0.656,3.485,5000,5000,5579.779,896.09,2.0.60,x64
+iron_smelter_threshold.zip,2,5.765,13.329,1.038,0.668,3.562,5000,5000,5191.730,963.07,2.0.60,x64
