@@ -14,7 +14,7 @@ from src.argparser import parse_args
 from src.confprint import print_selected_config
 from src.config import load_config
 from src.schemas import BenchmarkResult
-from src.meme import gotcha
+from src.bar import progress_bar
 
 
 def update_tqdm_from_line(line: str, progress: tqdm) -> None:
@@ -86,10 +86,11 @@ def parse_benchmark_output(
 
 
 def run_benchmark(
-    runtime: RuntimeConfig, benchmark: BenchmarkConfig, folder: str
+    runtime: "RuntimeConfig", benchmark: "BenchmarkConfig", folder: str
 ) -> None:
     folder_path = Path("benchmarks") / folder
     output_csv = folder_path / benchmark.output_file
+    hostcon_executable = Path(__file__).parent / "3rd-party" / "hostcon.exe"
 
     Check.dir_exists(folder_path)
     maps = list(folder_path.glob(f"*{benchmark.map_pattern}"))
@@ -110,25 +111,22 @@ def run_benchmark(
                 echo(
                     f"Running benchmark: {map_path.name} [Run {run_idx}/{benchmark.runs}]"
                 )
+                # ---- Use hostcon.exe as the runner ----
+                log_path = folder_path / f"{map_path.stem}_run{run_idx}_hostcon.log"
                 args = [
+                    str(hostcon_executable),
+                    str(log_path),
                     str(runtime.factorio_executable),
                     "--benchmark",
                     str(map_path),
                     "--benchmark-ticks",
                     str(benchmark.ticks),
                 ]
-
-                if runtime.disable_audio:
+                if getattr(runtime, "disable_audio", False):
                     args.append("--disable-audio")
+                subprocess.run(args, check=True)
 
-                process = subprocess.Popen(
-                    args,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT,
-                    bufsize=1,
-                    universal_newlines=True,
-                )
-
+                # ---- Now parse the log as live output ----
                 output_lines = []
                 progress = tqdm(
                     total=benchmark.ticks,
@@ -138,17 +136,16 @@ def run_benchmark(
                     dynamic_ncols=True,
                 )
 
-                for line in process.stdout:
-                    line = line.strip()
-                    output_lines.append(line)
+                with log_path.open(encoding="utf-8") as f_log:
+                    for line in f_log:
+                        line = line.strip()
+                        output_lines.append(line)
+                        match = re.search(r"Performed\s+(\d+)\s+updates", line)
+                        if match:
+                            current = int(match.group(1))
+                            progress.n = current
+                            progress.refresh()
 
-                    match = re.search(r"Performed\s+(\d+)\s+updates", line)
-                    if match:
-                        current = int(match.group(1))
-                        progress.n = current
-                        progress.refresh()
-
-                process.wait()
                 progress.n = benchmark.ticks
                 progress.close()
 
@@ -159,7 +156,6 @@ def run_benchmark(
                     run_idx,
                     benchmark.platform,
                 )
-
                 writer.writerow(asdict(result))
 
     echo(f"Benchmark results saved to: {output_csv}", level="S")
@@ -198,7 +194,6 @@ def run_selected_mode(
     if mode == "bench":
         run_benchmark(runtime_section, benchmark_section, args["folder"])
         echo("Benchmark completed successfully.", level="S")
-        gotcha()
     elif mode == "plot":
         run_plot(benchmark_section, plot_section, args["folder"], args["csv"])
         echo("Plots generated.", level="S")

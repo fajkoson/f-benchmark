@@ -6,5 +6,4 @@ REM -----------------------------------------------
 
 
 .env\scripts\python benchmark.py --mode bench 0001-iron-smelter
-
 pause

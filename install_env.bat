@@ -14,10 +14,10 @@ REM     @echo Installing local wheel of pseudoconsole
 REM     .env\scripts\python -m pip install --force-reinstall 3rd-party\pseudoconsole-1.0.0-cp312-cp312-win_amd64.whl || goto SETUP_FAIL
 REM )
 
-for %%W in (3rd-party\*.whl) do (
-    @echo Installing wheel: %%~nxW
-    .env\scripts\python -m pip install --force-reinstall "%%W" || goto SETUP_FAIL
-)
+REMfor %%W in (3rd-party\*.whl) do (
+REM     @echo Installing wheel: %%~nxW
+REM     .env\scripts\python -m pip install --force-reinstall "%%W" || goto SETUP_FAIL
+REM )
 
 :: exit codes
 @echo SUCCESS
