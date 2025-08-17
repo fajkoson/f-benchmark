@@ -27,6 +27,10 @@
     {
       "name": "Testbenchcontrols",
       "enabled": true
+    },
+    {
+      "name": "Region-Cloner",
+      "enabled": true
     }
   ]
 }

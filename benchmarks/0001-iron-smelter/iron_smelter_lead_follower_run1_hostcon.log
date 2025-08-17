@@ -1,0 +1,66 @@
+   0.001 2025-07-24 21:48:51; Factorio 2.0.60 (build 83512, win64, steam, space-age)
+   0.001 Operating system: Windows 10 (build 19045)
+   0.001 Program arguments: "d:\gamez\steamapps\common\Factorio\bin\x64\factorio.exe" "--benchmark" "benchmarks\0001-iro
+n-smelter\iron_smelter_lead_follower.zip" "--benchmark-ticks" "500" "--disable-audio"
+   0.001 Config path: C:/Users/palat/AppData/Roaming/Factorio/config/config.ini
+   0.001 Read data path: D:/gamez/steamapps/common/Factorio/data
+   0.002 Write data path: C:/Users/palat/AppData/Roaming/Factorio [126761/475867MB]
+   0.002 Binaries path: D:/gamez/steamapps/common/Factorio/bin
+   0.011 System info: [CPU: AMD Ryzen 5 5600X 6-Core Processor, 12 cores, RAM: 13359/32689 MB, page: 19526/64689 MB, vir
+tual: 4264/134217727 MB, extended virtual: 0 MB]
+   0.021 Memory info:
+   0.021  [0]: Unknown BL16G36C16U4B.M8FB1 16384 MB 3200 MHz 1.2 v 64|64
+   0.021  [1]: Unknown BL16G36C16U4B.M8FB1 16384 MB 3200 MHz 1.2 v 64|64
+   0.091 Running in headless mode
+   0.092 Audio is disabled
+   0.093 Info ModManager.cpp:444: FeatureFlag expansion-shaders = true
+   0.093 Info ModManager.cpp:444: FeatureFlag freezing = true
+   0.093 Info ModManager.cpp:444: FeatureFlag quality = true
+   0.093 Info ModManager.cpp:444: FeatureFlag rail-bridges = true
+   0.093 Info ModManager.cpp:444: FeatureFlag segmented-units = true
+   0.093 Info ModManager.cpp:444: FeatureFlag space-travel = true
+   0.093 Info ModManager.cpp:444: FeatureFlag spoiling = true
+   0.095 Loading mod settings RateCalculator 3.3.7 (settings.lua)
+   0.096 Loading mod settings EditorExtensions 2.5.0 (settings.lua)
+   0.098 Loading mod core 0.0.0 (data.lua)
+   0.111 Loading mod base 2.0.60 (data.lua)
+   0.263 Loading mod elevated-rails 2.0.60 (data.lua)
+   0.290 Loading mod flib 0.16.3 (data.lua)
+   0.298 Loading mod quality 2.0.60 (data.lua)
+   0.313 Loading mod Testbenchcontrols 2.1.22 (data.lua)
+   0.320 Loading mod RateCalculator 3.3.7 (data.lua)
+   0.326 Loading mod space-age 2.0.60 (data.lua)
+   0.590 Loading mod EditorExtensions 2.5.0 (data.lua)
+   0.618 Loading mod base 2.0.60 (data-updates.lua)
+   0.631 Loading mod quality 2.0.60 (data-updates.lua)
+   0.652 Loading mod space-age 2.0.60 (data-updates.lua)
+   0.665 Loading mod EditorExtensions 2.5.0 (data-final-fixes.lua)
+   0.766 Checksum for core: 4171658704
+   0.766 Checksum of base: 1534080171
+   0.767 Checksum of elevated-rails: 3379156108
+   0.767 Checksum of flib: 728527376
+   0.768 Checksum of quality: 3594706471
+   0.768 Checksum of Testbenchcontrols: 81320110
+   0.768 Checksum of RateCalculator: 1295360039
+   0.769 Checksum of space-age: 1185576405
+   0.769 Checksum of EditorExtensions: 1911884508
+   1.128 Prototype list checksum: 152184138
+   1.190 Info PlayerData.cpp:66: Local player-data.json unavailable
+   1.191 Info PlayerData.cpp:71: Cloud player-data.json unavailable
+   1.193 Factorio initialised
+   1.193 Loading map benchmarks\0001-iron-smelter\iron_smelter_lead_follower.zip: 16349606 bytes.
+   1.223 Loading level.dat: 146313388 bytes.
+   1.224 Info Scenario.cpp:153: Map version 2.0.47-0
+   4.886 Blueprint storage "blueprint-storage-2.dat" was not found, trying to load previous version storage "blueprint-s
+torage.dat"
+   5.784 Loading script.dat: 45728 bytes.
+   5.791 Checksum for script __RateCalculator__/control.lua: 3217831011
+   5.801 Checksum for script __EditorExtensions__/control.lua: 3560345608
+Running update 0
+Running update 100
+Running update 200
+Running update 300
+Running update 400
+  Performed 500 updates in 571.091 ms
+  avg: 1.142 ms, min: 0.825 ms, max: 3.478 ms
+  checksum: 722989316

@@ -1,5 +1,6 @@
 import re
 import csv
+import time
 import subprocess
 from sys import argv
 from tqdm import tqdm
@@ -85,12 +86,10 @@ def parse_benchmark_output(
     )
 
 
-def run_benchmark(
-    runtime: "RuntimeConfig", benchmark: "BenchmarkConfig", folder: str
-) -> None:
+def run_benchmark(runtime, benchmark, folder):
+    hostcon_executable = Path(__file__).parent / "3rd-party" / "hostcon.exe"
     folder_path = Path("benchmarks") / folder
     output_csv = folder_path / benchmark.output_file
-    hostcon_executable = Path(__file__).parent / "3rd-party" / "hostcon.exe"
 
     Check.dir_exists(folder_path)
     maps = list(folder_path.glob(f"*{benchmark.map_pattern}"))
@@ -108,10 +107,10 @@ def run_benchmark(
 
         for run_idx in range(1, benchmark.runs + 1):
             for map_path in maps:
+                # Print only the run info line
                 echo(
                     f"Running benchmark: {map_path.name} [Run {run_idx}/{benchmark.runs}]"
                 )
-                # ---- Use hostcon.exe as the runner ----
                 log_path = folder_path / f"{map_path.stem}_run{run_idx}_hostcon.log"
                 args = [
                     str(hostcon_executable),
@@ -124,30 +123,45 @@ def run_benchmark(
                 ]
                 if getattr(runtime, "disable_audio", False):
                     args.append("--disable-audio")
-                subprocess.run(args, check=True)
 
-                # ---- Now parse the log as live output ----
-                output_lines = []
+                proc = subprocess.Popen(args)
+
                 progress = tqdm(
                     total=benchmark.ticks,
-                    desc="Ticks",
+                    desc=f"Ticks [{run_idx}/{benchmark.runs}]",
                     unit="tick",
                     leave=False,
                     dynamic_ncols=True,
                 )
-
-                with log_path.open(encoding="utf-8") as f_log:
-                    for line in f_log:
+                last_tick = 0
+                # Live-tail the log
+                with open(log_path, "r", encoding="utf-8") as f_log:
+                    while (
+                        proc.poll() is None
+                        or f_log.tell() != Path(log_path).stat().st_size
+                    ):
+                        where = f_log.tell()
+                        line = f_log.readline()
+                        if not line:
+                            time.sleep(0.05)
+                            f_log.seek(where)
+                            continue
                         line = line.strip()
-                        output_lines.append(line)
-                        match = re.search(r"Performed\s+(\d+)\s+updates", line)
+                        match = re.search(r"Running update (\d+)", line)
                         if match:
                             current = int(match.group(1))
-                            progress.n = current
-                            progress.refresh()
+                            delta = current - last_tick
+                            if delta > 0:
+                                progress.update(delta)
+                                last_tick = current
+                    # Finish bar after process ends
+                    progress.n = benchmark.ticks
+                    progress.close()
+                proc.wait()
 
-                progress.n = benchmark.ticks
-                progress.close()
+                # Parse the log as before for result (after run)
+                with open(log_path, encoding="utf-8") as logf:
+                    output_lines = [line.rstrip("\r\n") for line in logf]
 
                 result: BenchmarkResult = parse_benchmark_output(
                     output_lines,

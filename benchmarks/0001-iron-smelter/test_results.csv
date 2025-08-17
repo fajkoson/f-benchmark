@@ -1,9 +1,2 @@
 map_name,run_index,startup_time,end_time,avg_ms,min_ms,max_ms,ticks,actual_ticks,execution_time,effective_ups,factorio_version,platform
-iron_smelter_enable_clocked.zip,1,5.802,checksum:,1.099,0.687,3.485,5000,5000,5495.916,909.77,2.0.60,x64
-iron_smelter_lead_follower.zip,1,5.838,checksum:,1.040,0.779,3.695,5000,5000,5201.893,961.19,2.0.60,x64
-iron_smelter_lead_follower_mini.zip,1,5.810,checksum:,1.017,0.632,3.400,5000,5000,5083.346,983.6,2.0.60,x64
-iron_smelter_threshold.zip,1,5.857,checksum:,1.057,0.665,3.523,5000,5000,5286.772,945.76,2.0.60,x64
-iron_smelter_enable_clocked.zip,2,5.697,checksum:,1.076,0.674,3.156,5000,5000,5382.269,928.98,2.0.60,x64
-iron_smelter_lead_follower.zip,2,5.792,13.367,1.054,0.760,3.380,5000,5000,5271.459,948.5,2.0.60,x64
-iron_smelter_lead_follower_mini.zip,2,5.783,checksum:,1.015,0.634,3.495,5000,5000,5075.338,985.16,2.0.60,x64
-iron_smelter_threshold.zip,2,5.855,checksum:,1.064,0.673,5.531,5000,5000,5320.134,939.83,2.0.60,x64
+iron_smelter_enable_clocked.zip,1,5.784,checksum:,1.125,0.711,3.152,500,500,562.369,889.1,2.0.60,x64
